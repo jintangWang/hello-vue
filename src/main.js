@@ -8,7 +8,7 @@ Vue.prototype.$http = axios
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import './libs/jquery.min.js'
-import Marked from './common/js/marked.js'
+import Marked from './common/directive/marked.js'
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
