@@ -6,10 +6,7 @@
 			<li class="register">注册</li>
 		</ul>
 
-		<div v-marked>
-			I am using __markdown__.
-		</div>
-
+		<p>测试v-marked指令：</p>
 		<div v-marked>
 ### hello
 [百度](www.baidu.com)

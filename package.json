@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "element-ui": "^1.2.3",
+    "highlight.js": "^9.10.0",
     "marked": "^0.3.6",
     "timeago.js": "^2.0.5",
     "vue": "^2.1.10",

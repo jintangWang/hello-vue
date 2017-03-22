@@ -1,4 +1,6 @@
 import marked from 'marked';
+import 'highlight.js/styles/monokai-sublime.css'
+
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -8,7 +10,10 @@ marked.setOptions({
   pedantic: false,
   sanitize: false,
   smartLists: true,
-  smartypants: false
+  smartypants: false,
+  highlight: function (code) {
+    return require('highlight.js').highlightAuto(code).value;
+  }
 });
 
 
@@ -16,7 +21,7 @@ let install = function(Vue){
 	/* istanbul ignore if */
 	if (install.installed) return;
 	Vue.directive('marked',function(el,binding,vnode){
-		el.innerHTML = marked(el.innerHTML);
+		el.innerHTML = marked(el.innerText);
 	})
 }
 

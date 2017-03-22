@@ -2,27 +2,27 @@
 	<ul class="article-list">
 		<li v-for="item in list" class="article-item">
 			<div class="title">
-				<span class="flag"><p v-if="item.top">置顶</p></span>
+				<span class="flag"><div v-if="item.top">置顶</div></span>
 				<span class="content">{{item.title}}</span>
 			</div>
 			<div class="description">
 				<img :src="item.author.avatar_url" :alt="item.author.loginname" class="avatar">
 				<div class="info">
-					<p>
+					<div>
 						<span class="name">{{item.author.loginname}}</span>
 						<span class="count">
 							<span class="reply">{{item.reply_count}}</span>
 							/{{item.visit_count}}
 						</span>
-					</p>
-					<p>
+					</div>
+					<div>
 						<span class="start">
 							{{item.create_at | getDiffTime}}
 						</span>
 						<span class="end">
 							{{item.last_reply_at | getDiffTime}}
 						</span>
-					</p>
+					</div>
 				</div>
 			</div>
 		</li>
@@ -109,7 +109,7 @@
 					display: inline-block;
 					width: calc(100% - 65px);
 					font-size: 12px;
-					p{	
+					div{	
 						vertical-align: top;
 						height: 25px;
 						line-height: 25px;
