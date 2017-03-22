@@ -1,5 +1,5 @@
 # hello-vue
-> A Vue.js project
+> vue2.0的demo，学习了elementUI组件，自定义markdown的指令...
 
 ## Build Setup
 
