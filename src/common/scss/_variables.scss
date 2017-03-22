@@ -1,0 +1,71 @@
+@charset "utf-8";
+$font-family:"宋体",Arial,sans-serif;
+$font-size:12px;
+
+//颜色开始:
+//1.带color的表示主色或作用较多的颜色，sub表示辅色
+//2.后缀由a、b排序的颜色表面由浅入深
+//3.渐变色的后缀是start与end
+
+
+//表示状态的颜色组----------------------------------------------
+$success:#25ae3a;
+$success-light:#ccffdd;
+$success-deep:#1e9d63;
+
+$warn:#ed9f37;
+$warn-light:#ffffcc;
+$warn-deep:#ff6600;
+
+$danger:#f55043;
+$danger-light:#ffd3d3;
+$danger-deep:#f00;
+
+$dark:#000;
+$dark-light:#222;
+
+
+
+//被取代的颜色：若替换后的颜色效果不好，请用自定义函数mixlighten()和mixdarken()处理基本色得到
+//1.主要用的蓝色：#3872f0 用$Blue-color-blue替换
+//2.字体用的深蓝色:#415571、#333、#444 都用$theme-font-deep替换
+//3.border用的浅灰色：#d8dde2、#DDE0E6等都用$theme-border替换
+//4.不欠不深的灰色：#ddd、#AEAEAE用$theme-sub-a:#ccc替换
+
+
+//蓝色主题相关颜色
+$theme-color:#1D89E4;//此主题的主色
+$theme-sub-a:#ccc;//此主题辅色:灰色
+$theme-sub-b:#fff;//此主题辅色:白色
+
+//蓝色对应的浅色和深色，类似于$danger-light、$danger-deep
+$theme-color-light:#d7ecfb;//此浅色常用作背景色
+$theme-color-deep:#006edb;
+
+
+//蓝色的一对渐变色
+$theme-color-start:#4aa1e9;
+$theme-color-end :#0f79d5;
+//白色的一对渐变色
+$theme-sub-start :#F5F5F5;
+$theme-sub-end :#EEEEEE;
+
+//主题字体相关
+$theme-font:#3a91ef;
+$theme-font-hover:#59b1fb;//字体hover颜色
+$theme-font-deep:#3f4a69;
+
+$theme-font-sub:#666;
+
+//主题边框
+$theme-border:#e4e4e4;
+
+//主题背景
+$theme-bg:#f9f9f9;
+
+//白色有浅入深有这么几种颜色：$theme-sub-b:#fff < $theme-bg:#f9f9f9 < $theme-sub-start :#F5F5F5 < $theme-sub-end :#EEEEEE
+//所以对于白色渐变色背景与hover时的渐变色背景可以这样:
+//正常状态下：@include linear-gradient(top, $theme-sub-start, $theme-sub-end);
+//hover时：  @include linear-gradient(top, $theme-sub-b, $theme-bg);
+
+//蓝色有浅入深有这么几种颜色：$theme-font-hover:#59b1fb < $theme-font:#3a91ef < $theme-color:#1D89E4 < $theme-color-start:#1E89E5 < $theme-color-end :#0f79d5

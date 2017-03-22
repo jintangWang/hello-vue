@@ -3,13 +3,13 @@
     <v-header :seller="seller"></v-header>
     <div class="tabs">
       <div class="tab-item">
-        <router-link to="/goods">商品</router-link>
+        <router-link to="/article">文章</router-link>
       </div>
       <div class="tab-item">
-        <router-link to="/comment">评论</router-link>
+        <router-link to="/comment">其他</router-link>
       </div>
       <div class="tab-item">
-        <router-link to="/business">商家</router-link>
+        <router-link to="/my">我的</router-link>
       </div>
     </div>
     <router-view></router-view>
@@ -17,44 +17,49 @@
 </template>
 
 <script>
-import header from 'components/header/header.vue';
+  import header from 'components/header/header.vue';
 
-const ERR_OK = 0;
+  const ERR_OK = 0;
 
-export default {
-  data:function(){
-    return {
-      seller:{}
+  export default {
+    data:function(){
+      return {
+        seller:{}
+      }
+    },
+    created:function(){
+    },
+    components:{
+      'v-header':header
     }
-  },
-  created:function(){
-    this.$http.get('/api/seller').then(function(response){
-      if (response.body.errno === ERR_OK) {
-          this.seller = Object.assign({}, this.seller, response.body.data);
-        }
-    });
-  },
-  components:{
-    'v-header':header
   }
-}
 </script>
 
-<style>
+<style lang="scss">
+  @import "./common/scss/_base.scss";
+
+  html{
+    font-family: $font-family;
+    font-size: $font-size;
+  }
   .tabs{
     display: flex;
     width: 100%;
-    height: 40px;
-    line-height: 40px;
-  }
-  .tab-item{
-    flex: 1;
-    text-align: center;
-  }
-  a{
-    display: block;
+    height: 39px;
+    position: fixed;
+    bottom: 0;
+    line-height: 39px;
+    background: #e8e8e8;
+    border-top: 1px solid #ccc;
+    .tab-item{
+      flex: 1;
+      text-align: center;
+    }
+    a{
+      display: block;
+    }
   }
   .tab-active{
-    background: #f00;
+    color: #006edb;
   }
 </style>

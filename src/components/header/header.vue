@@ -1,5 +1,5 @@
 <template>
-	<div>头部</div>
+	<div class="header">头部</div>
 </template>
 
 <script>
@@ -12,6 +12,12 @@
 	};
 </script>
 
-<style>
-	
+<style lang="scss">
+	.header{
+		height:36px;
+		line-height:36px;
+		text-align: center;
+		background: #444;
+		color: #fff;
+	}
 </style>

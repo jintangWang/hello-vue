@@ -1,0 +1,250 @@
+@charset "utf-8";
+@import "_variables";
+//公共的minix开始-------------------------------------------------------------------------------------------
+@mixin size($width:null, $height: $width){
+  @if $width{width: $width;}
+  @if $height{height: $height;}
+}
+@mixin clearfix{
+  &:before,&:after{
+    display: table;
+    content: '';
+  }
+  &:after{
+    clear: both;
+  }
+}
+@mixin horizontalCenter($width){
+  position: absolute;
+  left: 50%;
+  width: $width;
+  margin-left: -$width/2;
+}
+@mixin absuCenter($width,$height){
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: $width;
+  height: $height;
+  margin-left: -$width/2;
+  margin-top: -$height/2;
+}
+@mixin textOverflow{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow:hidden;
+}
+
+
+  //为兼容不同浏览器的minix---------------------------------------------------
+@mixin opacity($opacity){
+  $filter:$opacity * 100;
+  opacity: $opacity;
+  filter: alpha(opacity=$filter);
+}
+@mixin calcWidth($width){
+  width:-moz-calc(#{$width});
+  width:-webkit-calc(#{$width});
+  width:calc(#{$width});
+}
+@mixin border-radius($raidus){
+  -webkit-border-radius: $raidus;
+  -moz-border-radius: $raidus;
+  border-radius: $raidus;
+}
+@mixin box-shadow($shadow...){
+  -moz-box-shadow:$shadow;
+  -webkit-box-shadow:$shadow;
+  -o-box-shadow: $shadow;
+  box-shadow:$shadow;
+}
+@mixin box-sizing($sizing){
+  -webkit-box-sizing: $sizing;
+  -moz-box-sizing: $sizing;
+  box-sizing:$sizing;
+}
+@mixin text-shadow($shadow...){//此属性可放置多个参数
+  -webkit-text-shadow: $shadow;
+  -moz-text-shadow: $shadow;
+  text-shadow: $shadow;
+}
+@function getMozClip($clip){
+  $clipArr:border-box padding-box content-box text;
+  $mozClipArr:border padding content-box text;
+  $index:index($clipArr, $clip);
+  @return nth($mozClipArr,$index);
+}
+@mixin background-clip($clip){
+  -moz-background-clip: getMozClip($clip);//moz3.6-:border || padding
+  -webkit-background-clip: $clip;
+  background-clip: $clip;
+}
+@mixin user-select($select){
+  -moz-user-select:$select;
+  -webkit-user-select:$select;
+  -o-user-select:$select;
+  -ms-user-select:$select;
+  -khtml-user-select: $select;
+  user-select:$select;
+}
+@mixin transition($transition){
+  -webkit-transition:$transition;
+  -moz-transition:$transition;
+  -o-transition:$transition;
+  -ms-transition:$transition;
+  transition:$transition;
+}
+@mixin transform($transform){
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -o-transform: $transform;
+  -ms-transform: $transform;
+  transform:$transform;
+}
+@mixin animation($animation){
+  -webkit-animation: $animation;
+  -moz-animation: $animation;
+  -o-animation: $animation;
+  animation: $animation;
+}
+@function  getDirection($origin){
+  $direction:error;
+  @if type_of($origin)==string{
+    @if $origin==top{
+      $direction:(direcStart:50% 0%,direcEnd:50% 100%,toDirec:to bottom);
+    }@else if $origin==right{
+      $direction:(direcStart:100% 50%,direcEnd:0% 50%,toDirec:to left);
+    }@else if $origin==bottom{
+      $direction:(direcStart:50% 100%,direcEnd:50% 0%,toDirec:to top);
+    }@else if $origin==left{
+      $direction:(direcStart:0% 50%,direcEnd:100% 50%,toDirec:to right);
+    }
+  }@else if type_of($origin)==list{//带空格的参数类型是list
+    @if index($origin,left) and index($origin,top){
+      $direction:(direcStart:0% 0%,direcEnd:100% 100%,toDirec:to right bottom);
+    }@else if index($origin,left) and index($origin,bottom){
+      $direction:(direcStart:0% 100%,direcEnd:100% 0%,toDirec:to right top);
+    }@else if index($origin,right) and index($origin,top){
+      $direction:(direcStart:100% 0%,direcEnd:0% 100%,toDirec:to left bottom);
+    }@else if index($origin,right) and index($origin,bottom){
+      $direction:(direcStart:100% 100%,direcEnd:0% 0%,toDirec:to left top);
+    }
+  }@else if type_of($origin)==number{
+    //角度时无法计算-webkit-gradient的(x1,y1)与(x2,y2),直接设为默认的方向
+    @if $origin<180{
+      $direction:(direcStart:50% 0%,direcEnd:50% 100%,toDirec:$origin+180);
+    }@else {
+      $direction:(direcStart:50% 0%,direcEnd:50% 100%,toDirec:$origin-180);
+    }
+  }
+  @return $direction;
+}
+//只支持两种颜色范围的渐变
+@mixin linear-gradient($origin, $start, $stop){
+  $opposite:getDirection($origin);
+  background-color: mix($start,$stop);
+  background-image: -webkit-linear-gradient($origin, $start, $stop);
+  background-image: -webkit-gradient(linear, map-get($opposite,direcStart), map-get($opposite,direcEnd), from($start), to($stop));
+  background-image: -moz-linear-gradient($origin, $start, $stop);
+  background-image: -o-linear-gradient($origin, $start, $stop);
+  background-image: -ms-linear-gradient($origin, $start, $stop);
+  background-image: linear-gradient(map-get($opposite,toDirec), $start, $stop);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$start}, endColorstr=#{$stop}, GradientType=0);
+}
+//只支持单opacity属性的：0%、10%、20%...100%
+@mixin keyframes-opacity($name){
+  @-webkit-keyframes #{$name} {@include frames-opacity();}
+  @-moz-keyframes #{$name} {@include frames-opacity();}
+  @-o-keyframes #{$name} {@include frames-opacity();}
+  @keyframes #{$name} {@include frames-opacity();}
+}
+@mixin frames-opacity(){
+  $i:0;
+  @while $i <= 1{
+    $indicate:percentage($i);
+    #{$indicate} {
+      opacity: $i;
+      $i:$i + 0.1;
+    }
+  }
+}
+//支持多属性的0%和100%
+@mixin keyframes($name,$props,$starts,$ends){
+  @-webkit-keyframes #{$name} {@include frames($props,$starts,$ends);}
+  @-moz-keyframes #{$name} {@include frames($props,$starts,$ends);}
+  @-o-keyframes #{$name} {@include frames($props,$starts,$ends);}
+  @keyframes #{$name} {@include frames($props,$starts,$ends);}
+}
+@mixin frames($props,$starts,$ends){
+  $length:length($props);
+  0% {
+    @for $i from 1 through $length{
+      $prop:nth($props,$i);
+      #{$prop}:nth($starts,$i);
+    }
+  }
+  100%{
+    @for $j from 1 through $length{
+      $prop:nth($props,$j);
+      #{$prop}:nth($ends,$j);
+    }
+  }
+}
+
+
+
+
+//复合样式的minix-------------------------------------------------------------
+@mixin margin($top:null,$right:null,$bottom:null,$left:null){
+  @if $top{margin-top: $top;}
+  @if $right{margin-right: $right;}
+  @if $bottom{margin-bottom: $bottom;}
+  @if $left{margin-left: $left;}
+}
+@mixin padding($top:null,$right:null,$bottom:null,$left:null){
+  @if $top{padding-top: $top;}
+  @if $right{padding-right: $right;}
+  @if $bottom{padding-bottom: $bottom;}
+  @if $left{padding-left: $left;}
+}
+@mixin border($top:null,$right:null,$bottom:null,$left:null){
+  @if $top{border-top: $top;}
+  @if $right{border-right: $right;}
+  @if $bottom{border-bottom: $bottom;}
+  @if $left{border-left: $left;}
+}
+@mixin borderRadius($top-left:null,$top-right:null,$bottom-left:null,$bottom-right:null){
+  @if $top-left{border-top-left-radius:$top-left;}
+  @if $top-right{border-top-right-radius:$top-right;}
+  @if $bottom-left{border-bottom-left-radius:$bottom-left;}
+  @if $bottom-right{border-bottom-right-radius:$bottom-right;}
+}
+@mixin borderColor($top-color:null,$right-color:null,$bottom-color:null,$left-color:null){
+  @if $top-color{border-top-color:$top-color;}
+  @if $right-color{border-right-color:$right-color;}
+  @if $bottom-color{border-bottom-color:$bottom-color;}
+  @if $left-color{border-left-color:$left-color;}
+}
+@mixin position($position,$top:null,$right:null,$bottom:null,$left:null,$z-index:null){
+  position: $position;
+  @if $top{top: $top;}
+  @if $right{right: $right;}
+  @if $bottom{bottom: $bottom;}
+  @if $left{left: $left;}
+  @if $z-index{z-index: $z-index;}
+}
+
+//公共的minix结束-------------------------------------------------------------------------------------------
+
+
+//颜色操作函数--------------------------------------------
+
+/// 以mix的方式减轻颜色,与lighten的效果不同，推荐使用这个
+@function mixlighten($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+/// 以mix的方式加深颜色,与darken的效果不同，推荐使用这个
+@function mixdarken($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}

@@ -106,6 +106,7 @@ a {
   background-color: transparent; /* 1 */
   -webkit-text-decoration-skip: objects; /* 2 */
   text-decoration: none;
+  color: #444;
 }
 
 /**
@@ -116,6 +117,11 @@ a {
 a:active,
 a:hover {
   outline-width: 0;
+}
+
+
+li{
+  list-style: none;
 }
 
 /**

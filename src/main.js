@@ -3,24 +3,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import App from './App'
-
-import goods from 'components/goods/goods'
-import comment from 'components/comment/comment'
-import business from 'components/business/business'
+import axios from 'axios'
+Vue.prototype.$http = axios
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+import './libs/jquery.min.js'
+import Marked from './common/js/marked.js'
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+Vue.use(ElementUI);
+Vue.use(Marked);
 
-// let Goods = Vue.extend(goods);
+import App from './App'
+import article from 'components/article/article'
+import comment from 'components/comment/comment'
+import my from 'components/my/my'
+import login from 'components/my/login/login'
 
 
-const Bar = { template: '<div>bar</div>' }
 
 const routes = [
-	{path:'/goods',component:goods},//component:可以是goods，也可以是Goods
+	{path:'/article',component:article},//component:可以是goods，也可以是Goods
 	{path:'/comment',component:comment},
-	{path:'/business',component:business}
+	{path:'/my',component:my},
+	{path:'/my/login',component:login}
 ];
 
 let router = new VueRouter({
@@ -29,6 +36,9 @@ let router = new VueRouter({
 });
 
 router.push(routes[0]);//默认选中第一条
+
+//聚合网笑话appkey
+window.articleKey = '7e69e71b2fe39a230367f65d590ceb6c'; 
 
  // eslint-disable no-new 
 new Vue({

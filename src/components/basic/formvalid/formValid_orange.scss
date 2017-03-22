@@ -1,0 +1,93 @@
+@import "../../../common/scss/_base.scss";
+
+/*表单验证相关*/
+.tipMsgWrap
+{
+	display:none;
+	color:$theme-font-deep;
+	font-size: $font-size;
+	@include position(relative,1px,null,null,10px,100);
+	@include size(0,0);
+	vertical-align:bottom;
+	.formTip,.errorTips,.rightTip{
+		height:30px;
+		line-height:30px;
+		font-size:$font-size;
+		padding:0 10px 0 26px;
+		@include position(absolute,0,null,null,0,1);
+		border-radius:3px;
+		background-color: $danger-light;
+		white-space:nowrap
+	}
+	/*输入提示图片*/
+	.formTip,.errorTips{
+		left:-10px;
+	}
+	.formTip{
+		background:url("./images/formTip.png") 7px 7px no-repeat $theme-color-light;
+		color:$theme-color;
+	}
+	/* 错误信息提示图片*/
+	.errorTips
+	{
+		background:url("./images/errorMsg.png") 7px 8px no-repeat $danger-light;
+		color: $danger-deep;
+	}
+	/*信息填对提示图片*/
+	.rightTip
+	{
+		background:url("./images/formRight.png") 7px 8px no-repeat $success-light;
+		color:$success;
+	}
+	.tipFixed,.tipErr
+	{
+		color:$theme-color-light;
+		@include position(absolute,-9px,null,null,10px,2);
+		line-height:15px;
+		font-size:$font-size+2;
+	}
+	.tipErr
+	{
+		color: $danger-light;
+	}
+}
+
+
+
+.errorTipsCustom,.formTipCustom,.rightTipCustom
+{
+	height:24px;
+	line-height:24px;
+	padding:0 10px 0 26px;
+}
+.errorTipsCustom
+{
+	background:url("./images/errorMsg.png") 6px center  no-repeat;
+	color:$danger-deep;
+}
+.formTipCustom
+{
+	background:url("./images/formTip.png") 6px center no-repeat;
+}
+.rightTipCustom
+{
+	background:url("./images/formRight.png") 6px 7px no-repeat;
+}
+.errorTipsColor
+{
+	background-color:#FBE2E2 !important;
+	box-shadow: 0 0 3px $danger-deep;
+}
+
+.checkboxGroupWrap 
+{
+	left:0;
+	.tipFixed,.tipErr
+	{
+		left:3px
+	}
+}
+a.notNullTip{
+	color:red !important;height:20px;line-height:20px;padding-left:1px;text-decoration:none !important;
+}
+/*************************************************************/
