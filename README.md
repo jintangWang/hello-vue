@@ -1,6 +1,10 @@
 # hello-vue  
 **[demo](https://jintangwang.github.io/hello-vue/)**  
-> vue2.0的demo，学习了elementUI组件，自定义markdown的指令...
+> vue2.0的demo:  
+> 
+> - 学习了elementUI组件
+> - 自定义markdown的指令
+> - 上传照片生成二维码，下载二维码
 
 ## 运行此项目
 
