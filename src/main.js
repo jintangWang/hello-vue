@@ -24,7 +24,8 @@ import login from 'components/my/login/login'
 
 
 const routes = [
-	{path:'/article',component:article},//component:可以是goods，也可以是Goods
+	{path:'/',component: article},
+	{path:'/article',component:article},
 	{path:'/comment',component:comment},
 	{path:'/my',component:my},
 	{path:'/my/login',component:login}
@@ -35,7 +36,7 @@ let router = new VueRouter({
 	linkActiveClass:'tab-active'
 });
 
-router.push(routes[0]);//默认选中第一条
+// router.push(routes[0]);//默认选中第一条
 
 //聚合网笑话appkey
 window.articleKey = '7e69e71b2fe39a230367f65d590ceb6c'; 
