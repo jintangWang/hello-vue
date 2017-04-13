@@ -12,9 +12,7 @@
 	    	<img :src="originImg" alt="origin" v-else>
 	    </div>
 	    <h3>生成的二维码:</h3>
-	    <div class="resultImg" ref="result">
-	    	<!-- <img :src="resultQR" alt="结果二维码" ref="result"> -->
-	    </div>
+	    <div class="resultImg" ref="result"></div>
 	    <div>
 	    	<el-button type="primary" @click="download">下载二维码</el-button>
 	    </div>
