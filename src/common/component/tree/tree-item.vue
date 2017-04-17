@@ -1,14 +1,14 @@
 <template>
-	<li class="s-tree-item">
+	<li class="s-tree-item" @click.stop="nodeClick">
 		<i :class="[statusIconClass]" @click.stop='expand'></i>
-		<span>
+		<a>
 			<i  :class="[node.icon,nodeIconClass]"></i>
 			{{node.name}}
 			<i v-if="node.buttons" v-for="button in node.buttons" class="iButton" 
 				:class="[button.icon]" 
 				:title="button.title" 
-				@click.stop="nodeClick(button.click,node)"></i>
-		</span>
+				@click.stop="nodeIconClick(button.click,node)"></i>
+		</a>
 		<slot></slot>
 	</li>
 </template>
@@ -28,11 +28,22 @@
 			}
 		},
 		methods:{
+			nodeClick(){
+				let _this = this;
+				while(isNotTree(_this.$parent)){
+					_this = _this.$parent;
+				}
+				_this.$emit('node-click',this.node);
+			},
 			expand(){
 				this.$emit('expand',this.node);
 			},
-			nodeClick(fun,node){
-				this[fun](node);
+			nodeIconClick(fun,node){
+				if(typeof fun === 'function'){
+					fun(node);
+				}else if(typeof fun === 'string'){
+					this[fun](node);
+				}
 			},
 			addNode(node){
 				this.$emit('add-node',node);
@@ -45,13 +56,32 @@
 			}
 		}
 	}
+
+	function isNotTree(vm){
+		let classStr = vm.$el.className;
+		if(classStr.indexOf('s-tree')!==-1){
+			return true;
+		}
+		return false;
+	}
 </script>
 <style scoped lang="scss">
-	.iButton{
-		color: #1D8CE0;
-		padding-right: 5px;
-		&:hover:before{
-			color: #58B7FF;
+	.s-tree-item{
+		.iButton{
+			color: #1D8CE0;
+			padding-right: 5px;
+			&:hover:before{
+				color: #58B7FF;
+			}
 		}
+		a{
+			color: #333;
+			height: 30px;
+			line-height: 30px;
+			padding: 2px;
+			display: inline-block;
+			box-sizing: border-box;
+		}
+		
 	}
 </style>

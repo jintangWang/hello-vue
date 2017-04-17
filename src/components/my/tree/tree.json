@@ -12,7 +12,14 @@
         {
             "name": "Level1 with icon", 
             "icon": "fa fa-cube", 
-            "title": "192.168.89.0"
+            "title": "192.168.89.0",
+            "buttons": [
+                {
+                    "title": "Add", 
+                    "icon": "fa fa-plus",
+                    "click": ""
+                }
+            ]
         }, 
         {
             "name": "Edit node", 

@@ -55,32 +55,38 @@
 				node.isOpen = !node.isOpen;
 			},
 			addNode(node){
-				if(!node.hasOwnProperty('isParent')) this.$set(node,'isParent',true);
-				if(!node.hasOwnProperty('isOpen')) this.$set(node,'isOpen',true);
-				if(!node.hasOwnProperty('children')) this.$set(node,'children',[]);
-				node.isParent = true;
-				node.isOpen = true;
-				node.children.push({
-					"name": "child node", 
-					"isParent": false, 
-					"buttons": [
-						{
-						    "title": "Add", 
-						    "icon": "fa fa-plus",
-						    "click": "addNode"
-						},
-						{
-						    "title": "Edit", 
-						    "icon": "fa fa-edit",
-						    "click": "editNode"
-						},
-					    {
-					        "title": "Del", 
-					        "icon": "fa fa-trash",
-					        "click": "delNode"
-					    }
-					]
-				});
+				// let _this = this;
+				// while(isNotTree(_this.$parent)){
+				// 	_this = _this.$parent;
+				// }
+				// _this.$emit('add-node',() => {
+					if(!node.hasOwnProperty('isParent')) this.$set(node,'isParent',true);
+					if(!node.hasOwnProperty('isOpen')) this.$set(node,'isOpen',true);
+					if(!node.hasOwnProperty('children')) this.$set(node,'children',[]);
+					node.isParent = true;
+					node.isOpen = true;
+					node.children.push({
+						"name": "child node", 
+						"isParent": false, 
+						"buttons": [
+							{
+							    "title": "Add", 
+							    "icon": "fa fa-plus",
+							    "click": "addNode"
+							},
+							{
+							    "title": "Edit", 
+							    "icon": "fa fa-edit",
+							    "click": "editNode"
+							},
+						    {
+						        "title": "Del", 
+						        "icon": "fa fa-trash",
+						        "click": "delNode"
+						    }
+						]
+					});
+				// });
 			},
 			delNode(node){
 				let index = this.innerTreeData.indexOf(node);
@@ -110,9 +116,18 @@
 			}
 		}
 	}
+
+	function isNotTree(vm){
+		let classStr = vm.$el.className;
+		if(classStr.indexOf('s-tree')!==-1){
+			return true;
+		}
+		return false;
+	}
 </script>
 <style scoped lang="scss">
 	.s-tree{
+		cursor: pointer;
 		margin-left: 20px;
 		position: relative;
 		&:before{
@@ -121,7 +136,7 @@
 			position: absolute;
 			left: -15px;
 			top: -7px;
-			bottom: 15px;
+			bottom: 16px;
 			border-left: 1px solid #999;
 		}
 		.s-tree-item{
@@ -135,6 +150,7 @@
 				top: 15px;
 				border-top: 1px solid #999;
 			}
+			
 		}
 	}
 	.noBorder:before{
