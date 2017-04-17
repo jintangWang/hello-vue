@@ -1,0 +1,79 @@
+[{
+    "name": "Root Node", 
+    "isParent": true, 
+    "isOpen": true, 
+    "hasParent": true,
+    "openedIcon": "fa fa-folder-open-o", 
+    "closedIcon": "fa fa-folder-o", 
+    "children": [
+        {
+            "name": "Level1"
+        }, 
+        {
+            "name": "Level1 with icon", 
+            "icon": "fa fa-cube", 
+            "title": "192.168.89.0"
+        }, 
+        {
+            "name": "Edit node", 
+            "buttons": [
+                {
+                    "title": "Edit", 
+                    "icon": "fa fa-edit",
+                    "click": "editNode"
+                }
+            ]
+        }, 
+        {
+            "name": "Level1 has children", 
+            "icon": "fa fa-folder", 
+            "openedIcon": "fa fa-folder-open", 
+            "isOpen": true, 
+            "isParent": true, 
+            "children": [
+                {
+                    "name": "level2 - 1", 
+                    "icon": "fa fa-file"
+                }, 
+                {
+                    "name": "level2 - 2", 
+                    "icon": "fa fa-file"
+                }, 
+                {
+                    "name": "level2 - 3", 
+                    "icon": "fa fa-file"
+                }
+            ]
+        }, 
+        {
+            "name": "Level1 add node", 
+            "isParent": true, 
+            "children": [ ], 
+            "buttons": [
+                {
+                    "title": "Add", 
+                    "icon": "fa fa-plus",
+                    "click": "addNode"
+                }
+            ]
+        }, 
+        {
+            "name": "Level1-addNode", 
+            "isParent": true, 
+            "children": [ ], 
+            "buttons": [
+                {
+                    "title": "Add", 
+                    "icon": "fa fa-plus", 
+                    "click": "addNode"
+                }
+            ]
+        }, 
+        {
+            "name": "Level1 Ajax", 
+            "isParent": true, 
+            "children": [ ], 
+            "showLoading": true
+        }
+    ]
+}]

@@ -6,6 +6,10 @@
 			<li class="register">注册</li>
 		</ul>
 
+		<ul class="my-list">
+			<router-link to="/my/tree-demo">测试tree组件</router-link>	
+		</ul>
+
 		<p>测试v-marked指令：</p>
 		<div v-marked>
 ### hello

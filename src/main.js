@@ -20,6 +20,7 @@ import article from 'components/article/article'
 import comment from 'components/comment/comment'
 import my from 'components/my/my'
 import login from 'components/my/login/login'
+import treeDemo from 'components/my/tree/tree-demo'
 
 
 
@@ -28,7 +29,8 @@ const routes = [
 	{path:'/article',component:article},
 	{path:'/comment',component:comment},
 	{path:'/my',component:my},
-	{path:'/my/login',component:login}
+	{path:'/my/login',component:login},
+	{path:'/my/tree-demo',component:treeDemo}
 ];
 
 let router = new VueRouter({
