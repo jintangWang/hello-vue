@@ -55,38 +55,32 @@
 				node.isOpen = !node.isOpen;
 			},
 			addNode(node){
-				// let _this = this;
-				// while(isNotTree(_this.$parent)){
-				// 	_this = _this.$parent;
-				// }
-				// _this.$emit('add-node',() => {
-					if(!node.hasOwnProperty('isParent')) this.$set(node,'isParent',true);
-					if(!node.hasOwnProperty('isOpen')) this.$set(node,'isOpen',true);
-					if(!node.hasOwnProperty('children')) this.$set(node,'children',[]);
-					node.isParent = true;
-					node.isOpen = true;
-					node.children.push({
-						"name": `${node.name} childNode${node.children.length}`, 
-						"isParent": false, 
-						"buttons": [
-							{
-							    "title": "Add", 
-							    "icon": "fa fa-plus",
-							    "click": "addNode"
-							},
-							{
-							    "title": "Edit", 
-							    "icon": "fa fa-edit",
-							    "click": "editNode"
-							},
-						    {
-						        "title": "Del", 
-						        "icon": "fa fa-trash",
-						        "click": "delNode"
-						    }
-						]
-					});
-				// });
+				if(!node.hasOwnProperty('isParent')) this.$set(node,'isParent',true);
+				if(!node.hasOwnProperty('isOpen')) this.$set(node,'isOpen',true);
+				if(!node.hasOwnProperty('children')) this.$set(node,'children',[]);
+				node.isParent = true;
+				node.isOpen = true;
+				node.children.push({
+					"name": `${node.name} childNode${node.children.length}`, 
+					"isParent": false, 
+					"buttons": [
+						{
+						    "title": "Add", 
+						    "icon": "fa fa-plus",
+						    "click": "addNode"
+						},
+						{
+						    "title": "Edit", 
+						    "icon": "fa fa-edit",
+						    "click": "editNode"
+						},
+					    {
+					        "title": "Del", 
+					        "icon": "fa fa-trash",
+					        "click": "delNode"
+					    }
+					]
+				});
 			},
 			delNode(node){
 				let index = this.innerTreeData.indexOf(node);
@@ -115,14 +109,6 @@
 		        });
 			}
 		}
-	}
-
-	function isNotTree(vm){
-		let classStr = vm.$el.className;
-		if(classStr.indexOf('s-tree')!==-1){
-			return true;
-		}
-		return false;
 	}
 </script>
 <style scoped lang="scss">

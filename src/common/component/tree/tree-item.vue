@@ -32,9 +32,6 @@
 				return Bus.activeValue;
 			}
 		},
-		created(){
-			this.activeValue = Bus.activeValue;
-		},
 		methods:{
 			nodeClick(){
 				Bus.$emit('active',this.node.name);
