@@ -66,7 +66,7 @@
 					node.isParent = true;
 					node.isOpen = true;
 					node.children.push({
-						"name": "child node", 
+						"name": `${node.name} childNode${node.children.length}`, 
 						"isParent": false, 
 						"buttons": [
 							{

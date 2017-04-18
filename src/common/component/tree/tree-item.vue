@@ -1,7 +1,7 @@
 <template>
 	<li class="s-tree-item" @click.stop="nodeClick">
 		<i :class="[statusIconClass]" @click.stop='expand'></i>
-		<a>
+		<a :class="{'is-active': activeValue === node.name}">
 			<i  :class="[node.icon,nodeIconClass]"></i>
 			{{node.name}}
 			<i v-if="node.buttons" v-for="button in node.buttons" class="iButton" 
@@ -13,6 +13,8 @@
 	</li>
 </template>
 <script>
+	import Bus from './bus.vue';
+	
 	export default {
 		name: 'sTreeItem',
 		props: {
@@ -25,10 +27,17 @@
 			},
 			nodeIconClass(){
 				return this.node.isOpen ? this.node.openedIcon : this.node.closedIcon;
+			},
+			activeValue(){
+				return Bus.activeValue;
 			}
+		},
+		created(){
+			this.activeValue = Bus.activeValue;
 		},
 		methods:{
 			nodeClick(){
+				Bus.$emit('active',this.node.name);
 				let _this = this;
 				while(isNotTree(_this.$parent)){
 					_this = _this.$parent;
@@ -67,6 +76,19 @@
 </script>
 <style scoped lang="scss">
 	.s-tree-item{
+		&:last-child{
+			/*用来遮挡ul:before超出来的border*/
+			&:after{
+				content:'';
+				position: absolute;
+				left: -15px;
+				top: 16px;
+				bottom: 16px;
+				width: 2px;
+				background: #fff;
+				z-index: 9;
+			}
+		}
 		.iButton{
 			color: #1D8CE0;
 			padding-right: 5px;
@@ -81,6 +103,9 @@
 			padding: 2px;
 			display: inline-block;
 			box-sizing: border-box;
+			&.is-active{
+				background: #C0CCDA;
+			}
 		}
 		
 	}
